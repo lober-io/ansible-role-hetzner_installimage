@@ -2,4 +2,4 @@
 
 .vscode/settings.json
 ansible.cfg
-molecule/default/tests/test_default.pyc
+*.pyc

@@ -1,5 +1,9 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: nl2go.hetzner_installimage
+  tasks:
+    #- include_vars: nl2go.hetzner_installimage/defaults/main.yml
+    - name: Execute config task writing the installimage config file
+      include_role:
+        name: nl2go.hetzner_installimage
+        tasks_from: config

@@ -56,12 +56,12 @@
       - SWRAIDLEVEL {{ sw_raid_level }}
   when: hetzner_installimage_install_raid is not defined
 
-- name: set hetzner_installimage_install_raid value for no raid / single disk
+- name: set hetzner_installimage_install_drives value for no raid / single disk
   set_fact:
     hetzner_installimage_install_drives:
       - DRIVE1 /dev/{{ first_disk_device.stdout }}
 
-- name: set hetzner_installimage_install_raid value for raid 1
+- name: set hetzner_installimage_install_drives value for raid 1
   set_fact:
     hetzner_installimage_install_drives:
       - DRIVE1 /dev/{{ first_disk_device.stdout }}
