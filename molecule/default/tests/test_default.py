@@ -15,5 +15,6 @@ def test_autosetupfile_exists(host):
     assert f.group == 'root'
 
     assert f.contains('SWRAID 0')
+    assert f.contains('SWRAIDLEVEL 0')
     assert f.contains('DRIVE1')
     assert not f.contains('DRIVE2')
