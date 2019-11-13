@@ -14,7 +14,13 @@ def test_autosetupfile_exists(host):
     assert f.user == 'root'
     assert f.group == 'root'
 
+
+def test_autosetupfile_has_correct_config(host):
+    f = host.file('/autosetup')
+
     assert f.contains('SWRAID 0')
     assert f.contains('SWRAIDLEVEL 0')
     assert f.contains('DRIVE1')
     assert not f.contains('DRIVE2')
+
+    assert f.contains('Ubuntu-1604-xenial-64-minimal')
