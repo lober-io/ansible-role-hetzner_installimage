@@ -49,9 +49,9 @@ class RescueModeTest(unittest.TestCase):
         assert f.contains(expectOS)
 
     @idata(host_generator())
-    def test_hostcode_file_exists(self, hostname):
+    def test_provisioned_flag_file_exists(self, hostname):
         host = testinfra.get_host("docker://" + hostname)
-        f = host.file('/etc/hostcode')
+        f = host.file('/etc/provisioned.flag')
 
         assert f.exists
         assert f.user == 'root'
