@@ -1,0 +1,44 @@
+---
+scenario:
+  # custom test sequence without idempotence step
+  # due to hetzner_installimage_ignore_provisioned_flag the role will be executed twice and not be idempotent any more
+  test_sequence:
+    - lint
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: debian9
+    image: debian:9
+    dockerfile: ../resources/Dockerfile.j2
+  - name: debian10
+    image: debian:10
+    dockerfile: ../resources/Dockerfile.j2
+  - name: Ubuntu16
+    image: ubuntu:16.04
+    dockerfile: ../resources/Dockerfile.j2
+  - name: Ubuntu18
+    image: ubuntu:18.04
+    dockerfile: ../resources/Dockerfile.j2
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  env:
+    HETZNER_ROBOT_BASE_URL: http://hetzner-robot:3000
+  lint:
+    name: flake8
