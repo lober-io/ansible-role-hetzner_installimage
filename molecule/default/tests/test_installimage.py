@@ -58,7 +58,7 @@ class RescueModeTest(unittest.TestCase):
         assert f.group == 'root'
 
     @idata(host_generator())
-    def test_installimage_config_file_exists(self, hostname):
+    def test_installimage_config_backup_exists(self, hostname):
         host = testinfra.get_host("docker://" + hostname)
         f = host.file('/etc/hetzner_installimage.cfg')
 
