@@ -3,13 +3,13 @@
   set_fact:
     sw_raid_status: "{{ item.split(' ') | last| int }}"
   when: item is match("SWRAID") and item is not match("SWRAIDLEVEL")
-  with_items: "{{ hetzner_installimage_install_raid }}"
+  with_items: "{{ hetzner_installimage_install_raid | default([]) }}"
 
 - name: check if software raid level is set in hetzner_installimage_install_raid
   set_fact:
     sw_raid_level: "{{ item.split(' ') | last | int }}"
   when: item is match("SWRAIDLEVEL")
-  with_items: "{{ hetzner_installimage_install_raid }}"
+  with_items: "{{ hetzner_installimage_install_raid | default([]) }}"
 
 - name: automatically determine disk number
   shell: |
