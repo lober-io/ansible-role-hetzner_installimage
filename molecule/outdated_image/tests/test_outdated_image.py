@@ -1,5 +1,4 @@
 import os
-import requests
 import unittest
 
 from requests.auth import HTTPBasicAuth
