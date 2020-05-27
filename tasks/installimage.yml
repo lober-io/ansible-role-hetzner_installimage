@@ -62,6 +62,14 @@
     timeout: 180
   delegate_to: localhost
 
+- name: get os-release id
+  raw: . /etc/os-release; echo $ID
+  register: osrelease
+
+- name: trim os-release id
+  set_fact:
+    osrelease: "{{ osrelease.stdout | trim }}"
+
 # uses raw instead of module as python might not be installed yet
 - name: update apt repositories
   raw: apt-get update
@@ -70,11 +78,13 @@
   delay: 5
   register: update_apt
   until: update_apt.rc == 0
+  when: osrelease in ["debian", "ubuntu"]
 
 # uses raw instead of module as python might not be installed yet
 - name: install python on remote host
   raw: apt-get install python -y
   changed_when: true
+  when: osrelease in ["debian", "ubuntu"]
 
 - name: Lookup content of installimage config file
   set_fact:
