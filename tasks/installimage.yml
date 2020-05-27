@@ -64,6 +64,7 @@
 
 - name: get os-release id
   raw: . /etc/os-release; echo $ID
+  changed_when: false
   register: osrelease
 
 - name: trim os-release id
