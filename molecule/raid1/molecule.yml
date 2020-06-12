@@ -19,9 +19,6 @@ platforms:
   - name: CentOS7
     image: centos:7
     dockerfile: ../resources/Dockerfile.j2
-  - name: CentOS8
-    image: centos:8
-    dockerfile: ../resources/Dockerfile.j2
 provisioner:
   name: ansible
   lint:
