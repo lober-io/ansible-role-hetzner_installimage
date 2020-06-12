@@ -22,14 +22,13 @@
   get_url:
     url: https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py
     dest: /usr/bin/systemctl
-    mode: '0775''
+    mode: '0775'
 - name: Generate host keys on yum based hosts for SSH to work
   raw: if [ $(command -v yum) ]; then /usr/bin/ssh-keygen -A; fi
 - name: Start SSH server on apt based hosts as SSH is checked after reboot was requested
   raw: if [ $(command -v apt-get) ]; then service ssh start; fi
 - name: Start SSH server on yum based hosts as SSH is checked after reboot was requested
   raw: if [ $(command -v yum) ]; then service sshd start; fi
-  #raw: if [ $(command -v yum) ]; then mkdir -p /run/sshd; /usr/sbin/sshd -f /etc/ssh/sshd_config -d; fi
 - name: Get users homedir
   raw: command echo ~
   register: homedir
